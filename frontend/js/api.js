@@ -1,6 +1,11 @@
-const API_BASE = location.port === '3000'
-  ? '/api'
-  : 'http://localhost:3000/api';
+const API_BASE = (function () {
+  if (window.API_URL) return window.API_URL.replace(/\/$/, '');
+  const local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  if (local) {
+    return location.port === '3000' ? '/api' : 'http://localhost:3000/api';
+  }
+  return '/api';
+})();
 
 async function api(ruta, opciones = {}) {
   const headers = { ...(opciones.headers || {}) };

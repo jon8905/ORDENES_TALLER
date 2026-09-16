@@ -56,3 +56,16 @@ Prefijo `/api`:
 
 - `docs/ANALISIS.md` — requisitos, casos de uso y permisos
 - `docs/MODELO_DATOS.md` — relaciones y diagrama ER
+
+## Netlify
+
+Netlify solo sirve el **frontend** (carpeta `frontend/`). El backend (Node + MySQL) no corre ahí.
+
+1. En Netlify, Publish directory: `frontend` (ya viene en `netlify.toml`).
+2. Suba el API a un hosting con Node y MySQL (Render, Railway, un VPS, etc.).
+3. En `frontend/js/config.js` ponga la URL del API:
+
+```js
+window.API_URL = "https://su-api.onrender.com/api";
+```
+
