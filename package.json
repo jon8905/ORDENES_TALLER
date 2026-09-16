@@ -2,7 +2,11 @@
   "name": "taller-motocicletas",
   "private": true,
   "description": "Aplicativo web del Taller de Motocicletas ORDEN",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
+    "postinstall": "npm install --prefix backend",
     "start": "npm start --prefix backend",
     "dev": "npm run dev --prefix backend",
     "setup": "npm run setup --prefix backend",

@@ -69,3 +69,29 @@ Netlify solo sirve el **frontend** (carpeta `frontend/`). El backend (Node + MyS
 window.API_URL = "https://su-api.onrender.com/api";
 ```
 
+## Render
+
+El error `Cannot find module 'dotenv'` aparece si Render instala paquetes en la raíz y no dentro de `backend`.
+
+En el servicio web de Render configure:
+
+- **Root Directory:** `backend`
+- **Build Command:** `npm install`
+- **Start Command:** `npm start`
+
+Variables de entorno (Environment):
+
+```
+DB_HOST=
+DB_PORT=3306
+DB_USER=
+DB_PASSWORD=
+DB_NAME=taller_motocicletas
+JWT_SECRET=
+JWT_EXPIRES_IN=8h
+TALLER_NOMBRE=Taller Motocicletas ORDEN
+```
+
+MySQL debe estar en un servicio aparte (Render PostgreSQL no sirve; hace falta MySQL, por ejemplo PlanetScale, Railway o un VPS).
+
+
