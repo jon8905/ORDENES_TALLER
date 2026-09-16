@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingreso | Taller Motocicletas ORDEN</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <main class="login-page">
+    <section class="login-hero">
+      <div>
+        <div class="brand-mark">ClinimotosJJ</div>
+        <h1>Control total del taller, de la entrada a la entrega.</h1>
+        <p>Bienvenido al sistema de gestión de taller de motocicletas.</p>
+      </div>
+      <small>Taller Motocicletas ORDEN · Operación diaria </small>
+    </section>
+    <section class="login-panel">
+      <div class="login-card">
+        <h2>Iniciar sesión</h2>
+        <p class="hint">Ingrese con su correo electrónico.</p>
+        <form id="formLogin" class="form-grid" method="post" action="#">
+          <label>Correo electrónico
+            <input type="email" name="email" required placeholder="correo@taller.com" autocomplete="username">
+          </label>
+          <label>Contraseña
+            <input type="password" name="password" required placeholder="••••••••" autocomplete="current-password">
+          </label>
+          <button class="btn btn-primary btn-block" type="submit">Entrar al sistema</button>
+        </form>
+        <p class="muted" style="margin-top:16px;font-size:13px">
+          
+        </p>
+      </div>
+    </section>
+  </main>
+  <div class="toast-wrap" id="toasts"></div>
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    if (Auth.token()) location.href = 'app.html';
+    document.getElementById('formLogin').addEventListener('submit', async (evento) => {
+      evento.preventDefault();
+      const datos = Object.fromEntries(new FormData(evento.target));
+      try {
+        const respuesta = await api('/auth/login', { method: 'POST', body: JSON.stringify(datos) });
+        Auth.guardar(respuesta.datos);
+        location.href = 'app.html';
+      } catch (err) {
+        toast(err.message, 'err');
+      }
+    });
+  </script>
+</body>
+</html>
